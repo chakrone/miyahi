@@ -1,7 +1,7 @@
 // routes/order.routes.js
 const router = require("express").Router();
 const OrderController = require("../controllers/order.controller");
-const auth = require("../middleware/auth");
+const auth = require("../middleware/auth.middleware");
 
 router.post("/", auth, OrderController.createOrder);
 router.get("/", auth, OrderController.getMyOrders);
