@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const { PORT } = require("./backend/src/config/environment");
 const logger = require("./backend/src/config/logger");
 const connectDB = require("./backend/src/config/db");
@@ -8,6 +9,12 @@ const routes = require("./backend/src/routes/index.routes");
 
 const app = express();
 
+app.use(cors({
+  origin: ["http://localhost:5173", "http://localhost:3000"],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 app.use(express.json());
 

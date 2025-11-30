@@ -1,4 +1,4 @@
-// controllers/auth.controller.js
+﻿// controllers/auth.controller.js
 const AuthService = require("../services/auth.service");
 
 module.exports = {
@@ -17,6 +17,15 @@ module.exports = {
       res.status(200).json({ success: true, data: result });
     } catch (err) {
       res.status(401).json({ success: false, message: err.message });
-    }
-  }
+    }
+  },
+
+  getProfile: async (req, res) => {
+    try {
+      const user = req.user;
+      res.status(200).json({ success: true, data: user });
+    } catch (err) {
+      res.status(500).json({ success: false, message: err.message });
+    }
+  }
 };

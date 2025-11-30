@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const BASE = import.meta.env.VITE_API_BASE || '/api';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: BASE,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -10,13 +12,23 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
+    config.headers = config.headers || {};
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
-}); 
+});
 
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // If response has data with {success: true, data: ...} format, extract the data
+    if (response.data?.success === true && response.data?.data !== undefined) {
+      return {
+        ...response,
+        data: response.data.data
+      };
+    }
+    return response;
+  },
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');

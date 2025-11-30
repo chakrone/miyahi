@@ -4,8 +4,8 @@ const OrderController = require("../controllers/order.controller");
 const auth = require("../middleware/auth.middleware");
 
 router.post("/", auth, OrderController.createOrder);
-router.get("/", auth, OrderController.getMyOrders);
+router.get("/my-orders", auth, OrderController.getMyOrders);
 router.get("/:id", auth, OrderController.getOrderById);
 router.patch("/:id/status", auth, OrderController.updateOrderStatus);
 
-module.exports = router;
+module.exports = router;
