@@ -4,7 +4,7 @@ const logger = require("./backend/src/config/logger");
 const connectDB = require("./backend/src/config/db");
 
 // Load the routes (
-const routes = require("./backend/src/routes");
+const routes = require("./backend/src/routes/index.routes");
 
 const app = express();
 

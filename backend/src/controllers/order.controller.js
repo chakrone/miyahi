@@ -4,7 +4,7 @@ const OrderService = require("../services/order.service");
 module.exports = {
   createOrder: async (req, res) => {
     try {
-      const order = await OrderService.create(req.user.id, req.body);
+      const order = await OrderService.createOrder(req.user.id, req.body);
       res.status(201).json({ success: true, data: order });
     } catch (err) {
       res.status(400).json({ success: false, message: err.message });
